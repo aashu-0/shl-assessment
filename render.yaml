@@ -1,0 +1,18 @@
+# One-click deploy on Render (https://render.com).
+# Create a new "Blueprint" from the repo, then set GEMINI_API_KEY in the
+# dashboard (it is marked sync:false so it is never committed).
+services:
+  - type: web
+    name: shl-recommender
+    runtime: docker
+    plan: free
+    healthCheckPath: /health
+    envVars:
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: CHAT_MODEL
+        value: gemini-2.0-flash
+      - key: EMBED_MODEL
+        value: text-embedding-004
+      - key: USE_EMBEDDINGS
+        value: "true"
